@@ -1,0 +1,35 @@
+// 공통 설정 
+subprojects { 
+    apply plugin: 'java' 
+   
+    def defaultEncoding = 'UTF-8' 
+    compileJava.options.encoding = defaultEncoding 
+   
+    sourceCompatibility = 1.7 
+    targetCompatibility = 1.7 
+    
+     javadoc { 
+       options.links << 'http://docs.oracle.com/javase/jp/7/api/' 
+     } 
+ } 
+    
+    
+ // 라이브러리 프로젝트 
+ project('sd-common-lib') {} 
+    
+    
+ // 애플리케이션 프로젝트 
+ project('sd-front-web') { 
+     apply plugin: 'application' 
+    
+     mainClassName = 'SDFront' 
+     applicationName = 'SDFront' 
+    
+     dependencies { 
+       compile project(':sd-common-lib') 
+     } 
+    
+     run { 
+       standardInput = System.in 
+     } 
+ } 
